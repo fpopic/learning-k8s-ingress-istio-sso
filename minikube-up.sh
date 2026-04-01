@@ -19,7 +19,7 @@ kubectl apply -f k8s/6.ingress-resource.yaml
 
 
 # check that NodePort is assigned as expected
-kubectl get -n web service svc-ui --output='jsonpath={.spec.ports[0].nodePort}'
+kubectl get -n learning service svc-ui --output='jsonpath={.spec.ports[0].nodePort}'
 curl localhost:30123
 
 ## Set up DNS
@@ -30,8 +30,8 @@ curl localhost:30123
 
 # https://www.cyberciti.biz/faq/sudo-append-data-text-to-file-on-linux-unix-macos/
 # append to /etc/hosts
-192.168.49.2 my-web.com
+192.168.49.2 my-learning.com
 
 # dns still doesn't work
-curl my-web.com
-my-web.com
+curl my-learning.com
+my-learning.com

@@ -56,9 +56,9 @@ To understand how these pieces fit together, here is the purpose of each resourc
 
 ### 6. Ingress (`6.ingress-resource.yaml`)
 - **Purpose**: Acts as the **Smart Gateway** (L7 Load Balancer) that allows external traffic from the internet into your cluster.
-- **Features**: It handles domain-based routing (e.g., `my-web.com`), SSL/TLS termination, and path-based routing:
-  - `my-web.com/api/*` → `svc-api`
-  - `my-web.com/*` → `svc-ui`
+- **Features**: It handles domain-based routing (e.g., `my-learning.com`), SSL/TLS termination, and path-based routing:
+  - `my-learning.com/api/*` → `svc-api`
+  - `my-learning.com/*` → `svc-ui`
 
 ### The "Glue": Labels & Selectors
 - **Labels** are key-value pairs (like `app: ui`) attached to resources like Pods.
@@ -72,8 +72,8 @@ We extended the setup with a simple FastAPI application to demonstrate path-base
 - **`api/Dockerfile`**: A modern Docker image using **`uv`** (a high-performance Rust-based Python package manager) for near-instant dependency resolution and installation.
 
 **Available Endpoints**:
-- `http://my-web.com/api/users`
-- `http://my-web.com/api/payments`
+- `http://my-learning.com/api/users`
+- `http://my-learning.com/api/payments`
 
 ## Learning resources
 
