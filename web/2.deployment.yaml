@@ -6,11 +6,14 @@ metadata:
   labels:
     app: hello
 spec:
+  # deployment will take care of any pod matchingLabels app-hello
   selector:
     matchLabels:
       app: hello
+  # pod template
   template:
     metadata:
+      # required: define label for pod (used by higher k8s objects: Service, Deployment)
       labels:
         app: hello
     spec:

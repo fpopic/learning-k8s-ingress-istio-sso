@@ -1,14 +1,10 @@
 apiVersion: networking.k8s.io/v1
+# Gateway doesn't use labels but Service **Name**
 kind: Ingress
 metadata:
   name: web-ingress
   namespace: web
 spec:
-  defaultBackend:
-    service:
-      name: web-service
-      port:
-        number: 30123
   ingressClassName: nginx
   rules:
     - host: my-web.com
@@ -18,6 +14,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: web-service
+                name: svc-web
                 port:
                   number: 30123
