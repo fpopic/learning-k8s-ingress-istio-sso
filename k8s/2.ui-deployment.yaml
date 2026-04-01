@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-deployment
+  name: ui-deployment
   namespace: web
 spec:
-  # deployment will take care of any pod matchingLabels app-hello
+  # deployment will take care of any pod matchingLabels app-ui
   selector:
     matchLabels:
-      app: hello
+      app: ui
   # pod template
   template:
     metadata:
       # required: define label for pod (used by higher k8s objects: Service, Deployment)
       labels:
-        app: hello
+        app: ui
     spec:
       containers:
-        - name: web-container
+        - name: ui-container
           image: nginx
           ports:
             # https://stackoverflow.com/a/65270688/2122990

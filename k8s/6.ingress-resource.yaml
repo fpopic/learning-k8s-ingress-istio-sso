@@ -10,10 +10,17 @@ spec:
     - host: my-web.com
       http:
         paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: svc-api
+                port:
+                  number: 80
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: svc-web
+                name: svc-ui
                 port:
                   number: 30123

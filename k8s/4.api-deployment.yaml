@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+  namespace: web
+spec:
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+        - name: api-container
+          image: hello-api:latest
+          # In Minikube, we usually build the image locally and don't push it.
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80

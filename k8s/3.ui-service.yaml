@@ -2,12 +2,12 @@ apiVersion: v1
 # A Service provides a stable IP/DNS name for a group of dynamic Pods.
 kind: Service
 metadata:
-  name: svc-web
+  name: svc-ui
   namespace: web
 spec:
   # When traffic hits this Service it checks selector to which Pod to route the traffic
   selector:
-    app: hello
+    app: ui
   ports:
     - protocol: TCP
       targetPort: web-port

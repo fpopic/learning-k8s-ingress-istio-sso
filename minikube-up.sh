@@ -10,13 +10,16 @@ minikube addons enable ingress
 # start minikube k8s cluster (on m1 mac https://github.com/kubernetes/minikube/issues/11193#issuecomment-1105204485)
 minikube start --ports=30123:30123
 
-kubectl apply -f web/1.namespace.yaml
-kubectl apply -f web/2.deployment.yaml
-kubectl apply -f web/3.service.yaml
-kubectl apply -f web/4.ingress-resource.yaml
+kubectl apply -f k8s/1.namespace.yaml
+kubectl apply -f k8s/2.ui-deployment.yaml
+kubectl apply -f k8s/3.ui-service.yaml
+kubectl apply -f k8s/4.api-deployment.yaml
+kubectl apply -f k8s/5.api-service.yaml
+kubectl apply -f k8s/6.ingress-resource.yaml
+
 
 # check that NodePort is assigned as expected
-kubectl get -n web service web-service --output='jsonpath={.spec.ports[0].nodePort}'
+kubectl get -n web service svc-ui --output='jsonpath={.spec.ports[0].nodePort}'
 curl localhost:30123
 
 ## Set up DNS
@@ -31,3 +34,4 @@ curl localhost:30123
 
 # dns still doesn't work
 curl my-web.com
+my-web.com
