@@ -37,7 +37,7 @@ To understand how these pieces fit together, here is the purpose of each resourc
 
 We extended the setup with a simple FastAPI application to demonstrate path-based routing in the Ingress. This is a standard **Dockerized** setup.
 
-- **`api/Dockerfile`**: A minimal Docker image based on `python:3.9-slim` that installs dependencies and runs the app.
+- **`api/Dockerfile`**: A modern Docker image using **`uv`** (a high-performance Rust-based Python package manager) for near-instant dependency resolution and installation.
 - **Deployment (`4.api-deployment.yaml`)**: Runs the `hello-api:latest` image.
 - **Service (`5.api-service.yaml`)**: An internal Service (`ClusterIP`) that exposes the API within the cluster.
 - **Ingress Update**: The Ingress now routes traffic:

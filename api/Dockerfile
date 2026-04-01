@@ -1,18 +1,24 @@
 # Use a specific, stable base image
 FROM python:3.9-slim-bookworm
 
+# Install uv (extremely fast Rust-based Python package installer)
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
 # Set environment variables
 # 1. Prevent Python from writing .pyc files
 # 2. Force stdout/stderr to be unbuffered
+# 3. Compile Python bytecode to increase startup performance
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
+    UV_COMPILE_BYTECODE=1 \
     PORT=80
 
 WORKDIR /app
 
-# Install dependencies first (better layer caching)
+# Install dependencies using uv (much faster than pip)
+# --system: Install into the container's system Python environment
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN uv pip install --system --no-cache -r requirements.txt
 
 # Create a non-root user for security
 RUN adduser --disabled-password --gecos "" appuser && \
