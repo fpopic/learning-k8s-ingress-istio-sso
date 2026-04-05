@@ -3,6 +3,26 @@
 This setup uses the standard **Nginx Ingress Controller** to route traffic to the UI and API.
 
 ## Architecture
+```mermaid
+%%{init: {'flowchart': {'curve': 'stepBefore'}}}%%
+flowchart TD
+    User([User Browser]) -->|1. Request: localhost:82| Nginx
+
+    subgraph Cluster ["Kubernetes Cluster"]
+        subgraph Controller ["Ingress Layer"]
+            Nginx[Nginx Ingress Controller]
+        end
+
+        subgraph App ["Application Layer (learning-nginx namespace)"]
+            API[FastAPI Backend <br/> /api/*]
+            UI[Nginx UI <br/> /*]
+        end
+    end
+
+    Nginx -->|2. Route /api| API
+    Nginx -->|2. Route /| UI
+```
+
 - **Namespace**: `learning-nginx`
 - **Ingress Controller**: Listens on port **82** (to avoid conflicts with other labs).
 - **Hostname**: `localhost` (No `/etc/hosts` changes required).
