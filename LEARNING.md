@@ -21,6 +21,38 @@ This project documents the evolution from a basic Nginx Ingress setup to an ente
 ## 2. The Backend SSO Pattern
 Instead of implementing OIDC logic (tokens, redirects, validation) inside the FastAPI application, we use the **Sidecar/Proxy Pattern**:
 
+### Component Nesting Visualization
+This diagram shows how the components are physically and logically nested within the cluster:
+
+```mermaid
+%%{init: {'flowchart': {'curve': 'stepBefore'}}}%%
+flowchart TD
+    subgraph Service ["Service (Stable IP/DNS)"]
+        direction TB
+        
+        subgraph Deployment ["Deployment (Manager / ReplicaSet)"]
+            direction TB
+            
+            subgraph Pod ["Pod (Runtime Boundary)"]
+                direction LR
+                
+                subgraph AppContainer ["App Container"]
+                    Code[Main Application]
+                end
+                
+                subgraph Sidecar ["Istio Sidecar (Envoy)"]
+                    Proxy[Proxy Logic]
+                end
+            end
+        end
+    end
+
+    %% Routing Flow
+    Internet((Internet)) --> Service
+    Service -.->|Label Selector| Pod
+    Proxy <-->|Intercepts| Code
+```
+
 1.  **Request**: User hits Istio Gateway.
 2.  **Intercept**: Istio's `AuthorizationPolicy` sends a check request to `oauth2-proxy`.
 3.  **Validate**: `oauth2-proxy` checks for a session cookie. If missing, it redirects to the IDP (Keycloak).
