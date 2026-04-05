@@ -1,4 +1,4 @@
-# Learning Lab: Kubernetes Ingress & Backend SSO Pattern
+# Kubernetes Ingress & Backend SSO Pattern
 
 This project documents the evolution from a basic Nginx Ingress setup to an enterprise-grade **Istio Service Mesh** with **Single Sign-On (SSO)**.
 
