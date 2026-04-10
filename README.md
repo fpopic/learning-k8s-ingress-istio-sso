@@ -1,4 +1,4 @@
-# Kubernetes Learning Lab: Ingress & SSO (Colima Edition)
+# learning-k8s-ingress-istio-sso
 
 This project contains two self-contained implementations of a Kubernetes-based application with a FastAPI backend and a UI, optimized for **Colima**.
 
