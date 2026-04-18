@@ -65,4 +65,4 @@ spec:
     - destination:
         host: svc-ui
         port:
-          number: 30123
+          number: 80
